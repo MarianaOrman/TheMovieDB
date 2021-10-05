@@ -8,13 +8,13 @@
 import Foundation
 
 struct Movie: Decodable {
-    //so the names of the keys are more descriptive:
     private enum CodingKeys: String, CodingKey {
         case releaseDate = "release_date"
         case originalLanguage = "original_language"
         case imagePath = "backdrop_path"
         case rating = "vote_average"
         case title = "title"
+        case overview = "overview"
     }
     var overview: String?
     var releaseDate: String?
