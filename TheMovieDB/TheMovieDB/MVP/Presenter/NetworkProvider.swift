@@ -10,10 +10,15 @@ import UIKit
 
 class NetworkProvider {
 
-    var parseMoviesFromData = ParseMoviesFromData()
+    var movieParser = MovieParser()
     
-    public func getMovies (completion: @escaping ([Movie]) -> Void) {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=1f4d7de5836b788bdfd897c3e0d0a24b&language=en-US&page=1") else {
+    enum baseUrls: String {
+        case movieBaseUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=1f4d7de5836b788bdfd897c3e0d0a24b&language=en-US&page=1"
+        case imageBaseUrl = "https://image.tmdb.org/t/p/w500"
+    }
+    
+    public func getMovies(completion: @escaping ([Movie]) -> Void) {
+        guard let url = URL(string: baseUrls.movieBaseUrl.rawValue) else {
             completion([])
             return
         }
@@ -23,15 +28,15 @@ class NetworkProvider {
                 return
             }
             
-            let returnedData = self.parseMoviesFromData.parse(jsonData: data)
+            let returnedData = self.movieParser.movieParser(jsonData: data)
             completion(returnedData)
         }
         task.resume()
     }
     
-    func getImageData(url: String, completion: @escaping (UIImage?) -> Void) {
+    func getImage(url: String, completion: @escaping (UIImage?) -> Void) {
         
-        guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(url)") else { return }
+        guard let imageURL = URL(string: "\(baseUrls.imageBaseUrl.rawValue)\(url)") else { return }
         
         // So we don't cause a deadlock in the UI:
         DispatchQueue.global().async {

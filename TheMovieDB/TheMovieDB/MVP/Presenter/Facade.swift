@@ -10,13 +10,15 @@ import UIKit
 
 class Facade {
     
+    static let facadeSingleton = Facade()
+        
     let networkProvider = NetworkProvider()
     
-    func facadeGetMovies (completion: @escaping ([Movie]) -> Void) {
+    func facadeGetMovies(completion: @escaping ([Movie]) -> Void) {
         networkProvider.getMovies(completion: completion)
     }
     
-    func facadeGetImageData (url: String, completion: @escaping (UIImage?) -> Void) {
-        networkProvider.getImageData(url: url, completion: completion)
+    func facadeGetImage(url: String, completion: @escaping (UIImage?) -> Void) {
+        networkProvider.getImage(url: url, completion: completion)
     }
 }

@@ -18,13 +18,9 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieNameLabel: UILabel!
         
-    var movies: [Movie] = HomeScreenVC().movies
-
     func setMovieCell (movie: Movie) {
-    
-        let facade = Facade()
-        
-        facade.networkProvider.getImageData(url:movie.imagePath ?? "", completion: { [weak self] result in
+            
+        Facade.facadeSingleton.facadeGetImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                         
             DispatchQueue.main.async {
                 self?.imageCellImageView.image = result

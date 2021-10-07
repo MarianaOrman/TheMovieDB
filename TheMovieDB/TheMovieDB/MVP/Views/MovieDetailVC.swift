@@ -11,7 +11,7 @@ import UIKit
 class MovieDetailVC: UIViewController {
 
     var movie: Movie
-    var movieImageImageView = UIImageView()
+    var movieImageView = UIImageView()
     var movieNameLabel = UILabel()
     var languageLabel = UILabel()
     var overviewLabel = UILabel()
@@ -22,13 +22,12 @@ class MovieDetailVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    func setMovieData () {
-        let facade = Facade()
+    func setMovieData() {
         
-        facade.networkProvider.getImageData(url:movie.imagePath ?? "", completion: { [weak self] result in
+        Facade.facadeSingleton.facadeGetImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                         
             DispatchQueue.main.async {
-                self?.movieImageImageView.image = result
+                self?.movieImageView.image = result
             }
         })
         movieNameLabel.text = movie.title
@@ -36,7 +35,6 @@ class MovieDetailVC: UIViewController {
         overviewLabel.text = movie.overview
         ratingLabel.text = "Rating: \(movie.rating ?? 0)"
     }
-    
     
     required init?(coder: NSCoder) {
         return nil
@@ -47,14 +45,14 @@ class MovieDetailVC: UIViewController {
         
         setMovieData()
         
-        view.addSubview(movieImageImageView)
+        view.addSubview(movieImageView)
         view.addSubview(movieNameLabel)
         view.addSubview(languageLabel)
         view.addSubview(overviewLabel)
         view.addSubview(ratingLabel)
         
         setMovieImageImageViewFrames()
-        setMovieNameLabelFrame ()
+        setMovieNameLabelFrame()
         setLanguageLabelFrame()
         setOverviewLabelFrame()
         setRatingLabelFrame()
@@ -62,14 +60,14 @@ class MovieDetailVC: UIViewController {
     
     func setMovieImageImageViewFrames() {
                     
-        movieImageImageView.translatesAutoresizingMaskIntoConstraints = false
-        movieImageImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(0)).isActive = true
-        movieImageImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(80)).isActive = true
-        movieImageImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(0)).isActive = true
-        movieImageImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 9/16).isActive = true
-        }
+        movieImageView.translatesAutoresizingMaskIntoConstraints = false
+        movieImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(0)).isActive = true
+        movieImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(80)).isActive = true
+        movieImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(0)).isActive = true
+        movieImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 9/16).isActive = true
+    }
     
-    func setMovieNameLabelFrame () {
+    func setMovieNameLabelFrame() {
         
         movieNameLabel.translatesAutoresizingMaskIntoConstraints = false
         movieNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
@@ -80,7 +78,7 @@ class MovieDetailVC: UIViewController {
         movieNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
     
-    func setLanguageLabelFrame () {
+    func setLanguageLabelFrame() {
         
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         languageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
@@ -91,7 +89,7 @@ class MovieDetailVC: UIViewController {
         languageLabel.font = UIFont.boldSystemFont(ofSize: 13)
     }
     
-    func setOverviewLabelFrame () {
+    func setOverviewLabelFrame() {
         
         overviewLabel.translatesAutoresizingMaskIntoConstraints = false
         overviewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
@@ -105,7 +103,7 @@ class MovieDetailVC: UIViewController {
         overviewLabel.sizeToFit()
     }
     
-    func setRatingLabelFrame () {
+    func setRatingLabelFrame() {
         
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
@@ -115,6 +113,4 @@ class MovieDetailVC: UIViewController {
         ratingLabel.textColor = UIColor.yellow
         ratingLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
-    
-    
 }

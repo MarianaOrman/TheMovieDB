@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ParseMoviesFromData {
+class MovieParser {
         
-    func parse(jsonData: Data) -> [Movie] {
+    func movieParser(jsonData: Data) -> [Movie] {
         
         let result = (try? JSONDecoder().decode(MoviesGroup.self, from: jsonData))
 
