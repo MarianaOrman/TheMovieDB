@@ -22,6 +22,7 @@ class TestsNetworkProvider: XCTestCase {
             
             self?.movies = result
         })
+        
         XCTAssertNotNil(movies)
     }
     

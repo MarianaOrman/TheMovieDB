@@ -15,6 +15,7 @@ class TestMovieParser: XCTestCase {
         guard let filePath = Bundle(for: Self.self).path(forResource: "MoviesData", ofType: "json")
         else {
             print("Error opening the file")
+            XCTFail("Error opening the file")
             return
         }
         let fileUrl = URL(fileURLWithPath: filePath)
@@ -22,6 +23,7 @@ class TestMovieParser: XCTestCase {
             XCTFail("Error from file")
             return
         }
+
 
         let movies = MovieParser().parser(jsonData: data)
 
