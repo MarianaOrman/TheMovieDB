@@ -21,8 +21,9 @@
 		6217FE9026FBA7FB00943AF9 /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE8F26FBA7FB00943AF9 /* MovieDetailVC.swift */; };
 		6217FE942703865B00943AF9 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE932703865B00943AF9 /* MovieCollectionViewCell.swift */; };
 		6217FE96270B64B800943AF9 /* Facade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE95270B64B800943AF9 /* Facade.swift */; };
-		6217FE98270F2B5800943AF9 /* MovieParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE97270F2B5800943AF9 /* MovieParserTest.swift */; };
-		6217FE9A270F2D6A00943AF9 /* NetworkProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE99270F2D6A00943AF9 /* NetworkProviderTests.swift */; };
+		6217FE98270F2B5800943AF9 /* TestMovieParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE97270F2B5800943AF9 /* TestMovieParser.swift */; };
+		6217FE9A270F2D6A00943AF9 /* TestsNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE99270F2D6A00943AF9 /* TestsNetworkProvider.swift */; };
+		6217FE9C2710986B00943AF9 /* MoviesData.json in Sources */ = {isa = PBXBuildFile; fileRef = 6217FE9B2710986B00943AF9 /* MoviesData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +55,9 @@
 		6217FE8F26FBA7FB00943AF9 /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		6217FE932703865B00943AF9 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		6217FE95270B64B800943AF9 /* Facade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facade.swift; sourceTree = "<group>"; };
-		6217FE97270F2B5800943AF9 /* MovieParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieParserTest.swift; sourceTree = "<group>"; };
-		6217FE99270F2D6A00943AF9 /* NetworkProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProviderTests.swift; sourceTree = "<group>"; };
+		6217FE97270F2B5800943AF9 /* TestMovieParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMovieParser.swift; sourceTree = "<group>"; };
+		6217FE99270F2D6A00943AF9 /* TestsNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsNetworkProvider.swift; sourceTree = "<group>"; };
+		6217FE9B2710986B00943AF9 /* MoviesData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MoviesData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				02BCD44126B81F04003F3144 /* TheMovieDBTests.swift */,
-				6217FE97270F2B5800943AF9 /* MovieParserTest.swift */,
-				6217FE99270F2D6A00943AF9 /* NetworkProviderTests.swift */,
+				6217FE97270F2B5800943AF9 /* TestMovieParser.swift */,
+				6217FE9B2710986B00943AF9 /* MoviesData.json */,
+				6217FE99270F2D6A00943AF9 /* TestsNetworkProvider.swift */,
 				02BCD44326B81F04003F3144 /* Info.plist */,
 			);
 			path = TheMovieDBTests;
@@ -275,9 +278,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6217FE9C2710986B00943AF9 /* MoviesData.json in Sources */,
 				02BCD44226B81F04003F3144 /* TheMovieDBTests.swift in Sources */,
-				6217FE9A270F2D6A00943AF9 /* NetworkProviderTests.swift in Sources */,
-				6217FE98270F2B5800943AF9 /* MovieParserTest.swift in Sources */,
+				6217FE9A270F2D6A00943AF9 /* TestsNetworkProvider.swift in Sources */,
+				6217FE98270F2B5800943AF9 /* TestMovieParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

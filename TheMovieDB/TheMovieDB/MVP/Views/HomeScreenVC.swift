@@ -4,8 +4,6 @@
 //
 //  Created by Mariana Andrea Orman Berch on 21/9/21.
 //
-
-import Foundation
 import UIKit
 
 class HomeScreenVC: UIViewController {
@@ -18,9 +16,9 @@ class HomeScreenVC: UIViewController {
         
     lazy var collectionView: UICollectionView = UICollectionView()
     
-    enum identifiers: String {
-        case movieCollectionViewCell = "movieCollectionViewCell"
-        case movieTableViewCell = "MovieCell"
+    enum Constants {
+        static let movieCollectionViewCell = "movieCollectionViewCell"
+        static let movieTableViewCell = "MovieCell"
     }
     
     private func setUpMovieCollectionView() {
@@ -31,7 +29,7 @@ class HomeScreenVC: UIViewController {
         layout.itemSize = CGSize(width: (view.frame.size.width/3)-4, height: (view.frame.size.height/3)-4)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     
-        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.movieCollectionViewCell.rawValue)
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.movieCollectionViewCell)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
@@ -48,21 +46,8 @@ class HomeScreenVC: UIViewController {
         collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1).isActive = true
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpMovieCollectionView()
-        
-        switch deviceIdiom {
-        case .pad:
-            tableView.isHidden = true
-            collectionView.isHidden = false
-        default:
-            tableView.isHidden = false
-            collectionView.isHidden = true
-        }
-        
-        Facade.facadeSingleton.facadeGetMovies(completion: { [weak self] result in
+    func loadMoviesData() {
+        Facade.shared.getMovies(completion: { [weak self] result in
             
             self?.movies = result
             
@@ -76,6 +61,22 @@ class HomeScreenVC: UIViewController {
             }
         })
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setUpMovieCollectionView()
+        
+        switch deviceIdiom {
+        case .pad:
+            tableView.isHidden = true
+            collectionView.isHidden = false
+        default:
+            tableView.isHidden = false
+            collectionView.isHidden = true
+        }
+        loadMoviesData()
+    }
 }
 
 extension HomeScreenVC: UICollectionViewDataSource {
@@ -85,7 +86,7 @@ extension HomeScreenVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movie = movies[indexPath.row]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.movieCollectionViewCell.rawValue, for: indexPath) as? MovieCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.movieCollectionViewCell, for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.setMovieCell(movie: movie)
@@ -113,7 +114,7 @@ extension HomeScreenVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let movie = movies[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.movieTableViewCell.rawValue, for: indexPath) as? MovieTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.movieTableViewCell, for: indexPath) as? MovieTableViewCell
         else {
             return UITableViewCell()
         }

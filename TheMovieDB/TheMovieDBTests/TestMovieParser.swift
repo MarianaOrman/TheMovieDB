@@ -8,17 +8,22 @@
 import XCTest
 @testable import TheMovieDB
 
-class MovieParserTest: XCTestCase {
+class TestMovieParser: XCTestCase {
 
-    func movieParserTest() throws {
+    func testMovieParser() throws {
 
-        let fileUrl = URL(fileURLWithPath: "https://api.themoviedb.org/3/movie/top_rated?api_key=1f4d7de5836b788bdfd897c3e0d0a24b&language=en-US&page=1")
+        guard let filePath = Bundle(for: Self.self).path(forResource: "MoviesData", ofType: "json")
+        else {
+            print("Error opening the file")
+            return
+        }
+        let fileUrl = URL(fileURLWithPath: filePath)
         guard let data = try? Data(contentsOf: fileUrl) else {
             XCTFail("Error from file")
             return
         }
 
-        let movies = MovieParser().movieParser(jsonData: data)
+        let movies = MovieParser().parser(jsonData: data)
 
         XCTAssertEqual(movies[0].title, "Dilwale Dulhania Le Jayenge")
 

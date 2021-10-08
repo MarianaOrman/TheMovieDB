@@ -5,7 +5,6 @@
 //  Created by Mariana Andrea Orman Berch on 21/9/21.
 //
 
-import Foundation
 import UIKit
 
 class MovieTableViewCell: UITableViewCell {
@@ -20,7 +19,7 @@ class MovieTableViewCell: UITableViewCell {
         
     func setMovieCell (movie: Movie) {
             
-        Facade.facadeSingleton.facadeGetImage(url:movie.imagePath ?? "", completion: { [weak self] result in
+        Facade.shared.getImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                         
             DispatchQueue.main.async {
                 self?.imageCellImageView.image = result

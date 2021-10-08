@@ -5,7 +5,6 @@
 //  Created by Mariana Andrea Orman Berch on 22/9/21.
 //
 
-import Foundation
 import UIKit
 
 class MovieDetailVC: UIViewController {
@@ -24,7 +23,7 @@ class MovieDetailVC: UIViewController {
     
     func setMovieData() {
         
-        Facade.facadeSingleton.facadeGetImage(url:movie.imagePath ?? "", completion: { [weak self] result in
+        Facade.shared.getImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                         
             DispatchQueue.main.async {
                 self?.movieImageView.image = result

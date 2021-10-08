@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Foundation
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
@@ -101,7 +100,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
     func setMovieCell (movie: Movie) {
                 
-        Facade.facadeSingleton.facadeGetImage(url:movie.imagePath ?? "", completion: { [weak self] result in
+        Facade.shared.getImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                     
             DispatchQueue.main.async {
                 self?.imageCellImageView.image = result
