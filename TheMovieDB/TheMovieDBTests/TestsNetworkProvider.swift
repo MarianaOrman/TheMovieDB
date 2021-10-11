@@ -9,39 +9,39 @@ import XCTest
 @testable import TheMovieDB
 
 class TestsNetworkProvider: XCTestCase {
-    
-    var movies: [Movie] = []
-    
-    var imageView: UIImageView = UIImageView()
-    
-    let networkProvider = NetworkProvider()
-    
+                
     func testGetMovies() throws {
         
-        networkProvider.getMovies(completion: { [weak self] result in
+        let expect = expectation(description: "Download should have succeded.")
+                
+        Facade.shared.getMovies(completion: { result in
             
-            self?.movies = result
+            XCTAssertNotNil(result)
+            XCTAssertEqual(result[0].title, "Dilwale Dulhania Le Jayenge")
+            XCTAssertEqual(result[3].originalLanguage, "en")
+            
+            expect.fulfill()
         })
-        
-        XCTAssertNotNil(movies)
+        waitForExpectations(timeout: 5) { (error) in XCTAssertNil(error, "Test timed out")}
     }
     
     func TestGetImage() throws {
         
-        networkProvider.getImage(url: movies[0].imagePath ?? "", completion: { [weak self] resultOne in
+        let expect = expectation(description: "Download should have succeded.")
+        
+        var movies: [Movie] = []
+        
+        Facade.shared.getMovies(completion: { result in
             
-            DispatchQueue.main.async {
-                self?.imageView.image = resultOne
-            }
-            XCTAssertNotNil(resultOne)
+            movies = result
         })
         
-        networkProvider.getImage(url: movies[3].imagePath ?? "", completion: { [weak self] resultTwo in
+        Facade.shared.getImage(url: movies[0].imagePath ?? "", completion: {result in
             
-            DispatchQueue.main.async {
-                self?.imageView.image = resultTwo
-            }
-            XCTAssertNotNil(resultTwo)
+            XCTAssertNotNil(result)
+            
+            expect.fulfill()
         })
+        waitForExpectations(timeout: 5) { (error) in XCTAssertNil(error, "Test timed out")}
     }
 }

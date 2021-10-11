@@ -17,7 +17,7 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieNameLabel: UILabel!
         
-    func setMovieCell (movie: Movie) {
+    func setMovieCell(movie: Movie) {
             
         Facade.shared.getImage(url:movie.imagePath ?? "", completion: { [weak self] result in
                         
