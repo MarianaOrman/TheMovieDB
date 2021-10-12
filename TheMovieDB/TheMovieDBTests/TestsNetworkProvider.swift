@@ -29,14 +29,7 @@ class TestsNetworkProvider: XCTestCase {
         
         let expect = expectation(description: "Download should have succeded.")
         
-        var movies: [Movie] = []
-        
-        Facade.shared.getMovies(completion: { result in
-            
-            movies = result
-        })
-        
-        Facade.shared.getImage(url: movies[0].imagePath ?? "", completion: {result in
+        Facade.shared.getImage(url: "/5hNcsnMkwU2LknLoru73c76el3z.jpg", completion: {result in
             
             XCTAssertNotNil(result)
             
